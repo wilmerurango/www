@@ -1,0 +1,86 @@
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+<title>Crear Usuario</title>
+{% endblock titulo %}
+
+
+{% block content %}
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+
+    <div class="container">
+
+        <!-- <center> -->
+        <div class="card card-custom  col-lg-12 mt-6">
+
+            <div class="card-body ">
+                <form class="form" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="card-body">
+
+                        <h3>REGISTRAR USUARIO</h3>
+                        <br>
+                        <hr>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label>Nombres:</label>
+                                {{form2.first_name }}
+
+                                <label>Apellidos:</label>
+                                {{form2.last_name }}
+
+                                <label>Email:</label>
+                                {{form2.email }} 
+
+                                <label>Usuario:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text"><i
+                                        class="la la-user"></i></span>
+                                    </div>
+                                    {{form2.username }}
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <label>Cargo:</label>
+                                {{form.cargo }} 
+
+                                <label>Rol:</label>
+                                {{form.rol }}
+
+                                <label>Contraseña:</label>
+                                {{form2.password }}
+
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input type="submit" class="btn btn-primary" value="Guardar">
+                            </div>
+
+                            <div class="col-lg-6 text-right">
+                                <button type="reset" class="btn btn-secondary">Borrar</button>
+                                <a class="btn btn-danger" href="{% url 'index' %}">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- </center> -->
+
+    </div>
+</div>
+
+{% endblock content %}

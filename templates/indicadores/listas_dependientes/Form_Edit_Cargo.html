@@ -1,0 +1,30 @@
+<form class="form" method="post"> <!--se agrego el metrodo post-->
+    {% csrf_token %}
+    <div class="card-body">
+        <h3 class="kt-section__title">Registrar Cargo</h3>
+        <hr>
+
+        <div class="form-group row">
+            <div data-toggle="tooltip" data-theme="dark" title="Por favor escriba el nombre del cargo" class="col-lg-12">
+                <label >Nombre del Cargo:</label>
+                {{ form.nombre_cargo }}
+                <!-- <input type="email" class="form-control" placeholder="Enter full name"/> -->
+                <!-- <span class="form-text text-muted">Please enter your full name</span> -->
+            </div>
+
+        </div>
+    </div>
+      
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-lg-6">
+                <input type="submit" class="btn btn-primary" value="Guardar">
+            </div>
+
+            <div class="col-lg-6 text-right">
+                <button type="reset" class="btn btn-secondary">Borrar</button>
+                <a class="btn btn-danger" href="{% url 'Cargo_list' %}">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</form>

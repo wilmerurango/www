@@ -1,0 +1,371 @@
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+    <title>LLenar Indicador</title>
+{% endblock titulo %}
+
+
+{% block scripts_local %}
+    <script>
+        
+        function cambiar_estilo(){
+            var estilo_celda = document.getElementsByClassName('estilo_celda');
+            var desabilitar = document.getElementsByClassName('desabilitar');
+            cont = estilo_celda.length
+            
+            var i = 0
+            var vector = [];
+            var vector_dos =[];
+            for (i=0;i<cont;i++){
+
+                var valor_indi = estilo_celda[i].getAttribute("title").replace(',','.');
+                var tendencia_ascendente = estilo_celda[i].getAttribute("data-ten_as").replace(',','.');
+                var standar = estilo_celda[i].getAttribute("lang").replace(',','.');
+
+                vi = parseFloat(valor_indi);
+                st = parseFloat(standar);
+                
+                if(tendencia_ascendente=="Ascendente"){
+                    alert(vi)
+                    if(vi<=st*0.8){
+                        estilo_celda[i].className = 'color_rojo';
+                    }
+                    else{
+                        if (vi<st){
+                            estilo_celda[i].className = 'color_amarillo';
+                        }else{
+                            estilo_celda[i].className = 'color_verde';
+                            
+                        }
+                        
+                    }
+                }
+                else{
+
+                    if(vi<=st*0.8){
+                        estilo_celda[i].className = 'color_verde';
+                    }
+                    else{
+                        if (vi<st){
+                            estilo_celda[i].className = 'color_amarillo';
+                        }else{
+                            estilo_celda[i].className = 'color_rojo';
+                            
+                        }
+                        
+                    }
+                }
+
+            }
+            // console.log(vector_dos)
+        }
+
+        function ElimRegistro(clicked_id, titulo)
+        {
+            var id = String(clicked_id);
+            var nombre_view = document.getElementById('Contenedor_idd').innerHTML = "¿Estas Seguro de Eliminar el Registro " + '"' +titulo +'" '+ "Identificado con ID "+'"'+ id +'"' + " ?";
+            ruta = '/Lenar_Indicador_elim/'+id +'/';
+            document.getElementById('selector_elim').href = ruta;
+        }
+
+        function resultado()
+        {
+            // variables numericas traidas en formato texto
+            var fact = document.getElementById("id_factor");
+            var estan = document.getElementById("id_estandar");
+            var num = document.getElementById("id_valor_numerador");
+            var dem = document.getElementById("id_valor_denominador");
+            var tendencia_ascendente = document.getElementById("id_tendencia_ascendente");
+            
+            // convertir variables en formato numerico
+            var factor = parseInt(fact.value,10);
+            var estandar = Math.floor(parseFloat(estan.value),1);
+            var resultado = (num.value/dem.value)*factor;
+
+            // valores que se van a mostrar en el front
+            var mostrar = document.getElementById("entrada_resultado");
+            var descrip = document.getElementById("descripcion");
+
+            // condicional para asignar color dependiendo del resultado
+
+            if(tendencia_ascendente.value=="Ascendente"){//el indicador es de tendencia ascendente (entre mas alto mejor)
+                if(resultado <= estandar*0.8){
+                    mostrar.className = 'form-control bg-danger';
+                    mostrar.value = resultado;
+                    descrip.innerHTML = "<p> FALLASTE!!! Este periodo Estuviste por debajo del Estandar para este indicador, Una vez guardado este formulario por favor dirigite a la lista de Indicadores y en campo accion define el PLAN DE MEJORAMINETO respectivo </p>";
+                    descrip.className = "text-danger";
+                }
+                else{
+                    if (resultado < estandar){
+                        mostrar.className = 'form-control bg-warning';
+                        mostrar.value = resultado;
+                        descrip.innerHTML = "<p> CUIDADO!!! este periodo Estuviste muy cerca del Estandar para este indicador, Una vez guardado este formulario por favor dirigite a la lista de Indicadores y en campo accion define el PLAN DE MEJORAMINETO respectivo </p>";
+                        descrip.className = "text-warning";
+                    }else{
+                        mostrar.className = 'form-control bg-success';
+                        mostrar.value = resultado;
+                        descrip.innerHTML = "<p> FELICIDADES !!!! Este periodo Estuviste GENIAL, NO tienes que realizar el plan de mejoramiento </p>";
+                        descrip.className = "form-control  text-success border-success";
+                    }
+                
+                }
+ 
+            }
+            else{//el indicador es de naturaleza descendente (entre mas bajo mejor)
+                if(resultado <= estandar*0.8){
+                    mostrar.className = 'form-control bg-success';
+                    mostrar.value = resultado;
+                    descrip.innerHTML = "<p> FELICIDADES !!!! Este periodo Estuviste GENIAL, NO tienes que realizar el plan de mejoramiento </p>";
+                    descrip.className = "form-control  text-success border-success";
+                }
+                else{
+                    if (resultado < estandar){
+                        mostrar.className = 'form-control bg-warning';
+                        mostrar.value = resultado;
+                        descrip.innerHTML = "<p> CUIDADO!!! este periodo estuviste muy cerca del Estandar para este indicador, Una vez guardado este formulario por favor dirigite a la lista de Indicadores y en campo accion define el PLAN DE MEJORAMINETO respectivo </p>";
+                        descrip.className = "text-warning";
+                    }else{
+                        mostrar.className = 'form-control bg-danger';
+                        mostrar.value = resultado;
+                        descrip.innerHTML = "<p> FALLASTE!!! este periodo Estuviste por debajo del Estandar para este indicador, Una vez guardado este formulario por favor dirigite a la lista de Indicadores y en campo accion define el PLAN DE MEJORAMINETO respectivo </p>";
+                        descrip.className = "text-danger";
+
+                    }
+                
+                }
+
+            }
+
+        }
+
+    </script>
+{% endblock scripts_local %}
+
+
+{% block content %}
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    
+    <div class="container">
+        
+        
+        <!-- <center> -->
+        <div class="card card-custom mt-6">
+            
+            <div class="card-body">
+                
+                <form method="POST" class="form" id="lista_sub_grupo_form" data-sub_grupo-url="{% url 'Lista_sub_grupo_ajax'%}" data-indicador-url="{% url 'Lista_Indicador_ajax'%}" data-Lenar_Indicador-url="{% url 'Lenar_Indicador_numerador'%}" data-Lenar_Indicador_unidad-url="{% url 'Lenar_Indicador_unidad'%}">
+                    {% csrf_token %}
+
+                    <h3>Registrar Indicador</h3>
+
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <div class="col-lg-4">
+                            <label>Grupo General:</label>
+                            {{ form.grupo_general}}
+                            <!-- <input type="email" class="form-control" placeholder="Enter full name"/>
+                            <span class="form-text text-muted">Please enter your full name</span> -->
+                            </div>
+                            
+                            <div class="col-lg-4">
+                            <label>Sub-Grupo:</label>
+                            {{ form.sub_grupo}}
+                            <!-- <input type="email" class="form-control" placeholder="Enter email"/>
+                            <span class="form-text text-muted">Please enter your email</span> -->
+                            </div>
+
+                            <div class="col-lg-4">
+                                <label>Indicador:</label>
+                                <div class="input-group">
+                                    {{ form.indicador}}
+                                    <!-- <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                                    <input type="text" class="form-control" placeholder=""/> -->
+                                </div>
+                                <!-- <span class="form-text text-muted">Please enter your username</span> -->
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-4">
+                                <label>Rango del Periodo:</label>
+                                <!-- {{ form.fecha_inicio}}
+                                {{ form.fecha_fin}} -->
+                                <div class="input-daterange input-group" id="kt_datepicker_5" data-date-format = "dd/mm/yyyy">
+                                    {{ form.fecha_inicio}}
+                                    <!-- <input type="text" class="form-control" name="start" /> -->
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="la la-ellipsis-h"></i>
+                                        </span>
+                                    </div>
+                                    {{ form.fecha_fin}}
+                                    <!-- <input type="text" class="form-control" name="end" /> -->
+                                </div>
+                                <!-- <input type="email" class="form-control" placeholder="Enter contact number"/>
+                                <span class="form-text text-muted">Please enter your contact</span> -->
+                            </div>
+
+                            <div class="col-lg-4">
+                                <label>Fecha Registro:</label>
+                                <div class="input-group">
+                                    {{ form.fecha}}
+                                    <!-- <div class="input-group-prepend"><span class="input-group-text"><i class="la la-info-circle"></i></span></div>
+                                    <input type="text" class="form-control" placeholder="Fax number"/> -->
+                                </div>
+                                <!-- <span class="form-text text-muted">Please enter fax</span> -->
+                            </div>
+
+                            <div class="col-lg-4">
+
+                                <div class="row">
+                                    <div id ="resultado" class="col-lg-5">
+                                        <label>Resultado:</label>
+                                        <div  class="input-group">
+                                            <input disabled id="entrada_resultado" type="number" class="form-control border-success"/>
+                                            <!-- <div class="input-group-prepend"><span class="input-group-text"><i class="la la-info-circle"></i></span></div> -->
+                                        </div>
+                                        <!-- <span class="form-text text-muted">Please enter fax</span> -->
+                                    </div>
+
+                                    <div id="entrada_unidad" class="col-lg-7">
+                                        
+                                        <!-- <span class="form-text text-muted">Please enter fax</span> -->
+                                    </div>
+
+                                </div>
+                               
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label>Analisis:</label>
+                                <div  class="input-group">
+                                    {{ form.analisis}}
+                                </div>
+                                <!-- <span class="form-text text-muted">Please enter fax</span> -->
+                            </div>
+
+                            <div class="col-lg-6">
+                                <label>Observación:</label>
+                                <div  class="input-group">
+                                    {{ form.observacion}}
+                                </div>
+                                <!-- <span class="form-text text-muted">Please enter fax</span> -->
+                            </div>
+                            
+
+                        </div>
+
+                        <br>
+
+                        <div id="conten" class="form-group row">
+                            
+                        </div>
+
+                        <div  id="descripcion" class="col-lg-12 border-dark" class="form-group row">
+                        
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                
+                            <div class="col-lg-6 text-right">
+                                <button type="reset" class="btn btn-secondary">Borrar</button>
+                                <a class="btn btn-danger" href="{% url 'Lenar_Indicador_list' %}">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            
+                <script>
+                    $("#id_grupo_general").change(function () {
+                        var url = $("#lista_sub_grupo_form").attr("data-sub_grupo-url");  // get the url of the `load_cities` view
+                        var grupo_generalId = $(this).val();  // get the selected country ID from the HTML input
+
+                        $.ajax({                       // initialize an AJAX request
+                        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                        data: {
+                            'grupo_general': grupo_generalId       // add the country id to the GET parameters
+                        },
+                        success: function (data) {   // `data` is the return of the `load_cities` view function
+                            $("#id_sub_grupo").html(data);  // replace the contents of the city input with the data that came from the server
+                        }
+                        });
+                    });
+                    
+                    $("#id_sub_grupo").change(function () {
+                        var url = $("#lista_sub_grupo_form").attr("data-indicador-url");  // get the url of the `load_cities` view
+                        var sub_grupoId = $(this).val();  // get the selected country ID from the HTML input
+
+                        $.ajax({                       // initialize an AJAX request
+                        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                        data: {
+                            'sub_grupo': sub_grupoId       // add the country id to the GET parameters
+                        },
+                        success: function (data) {   // `data` is the return of the `load_cities` view function
+                            $("#id_indicador").html(data);  // replace the contents of the city input with the data that came from the server
+                        }
+                        });
+                    });
+
+                    // Este es el ajax que oculta los campos
+                    $("#id_indicador").change(function () {
+                        var url = $("#lista_sub_grupo_form").attr("data-Lenar_Indicador-url");
+                        var url2 = $("#lista_sub_grupo_form").attr("data-Lenar_Indicador_unidad-url");
+                        var indicadorId = $(this).val();  // get the selected country ID from the HTML input
+
+                        $.ajax({                       // initialize an AJAX request
+                        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                        data: {
+                            'indicador': indicadorId
+                        },
+                        success: function (data) {   // `data` is the return of the `load_cities` view function
+                            $("#conten").html(data);  // replace the contents of the city input with the data that came from the server
+                        }
+                        });
+
+                        $.ajax({                       // initialize an AJAX request
+                        url: url2,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                        data: {
+                            'indicador': indicadorId
+                        },
+                        success: function (data) {   // `data` is the return of the `load_cities` view function
+                            $("#entrada_unidad").html(data);  // replace the contents of the city input with the data that came from the server
+                        }
+                        });
+
+                    });
+
+                </script>
+
+            </div>
+        </div>
+
+        <!-- </center> -->
+        
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block scripts%}
+
+    {% load static %}
+    <!--begin::Page Scripts(used by this page) -->
+    <script src="{% static 'theme/demo1/dist/assets/js/pages/features/forms/widgets/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'theme/demo1/dist/assets/js/pages/features/forms/widgets/select2.js' %}"></script>
+
+    <!--end::Page Scripts -->
+{% endblock %}

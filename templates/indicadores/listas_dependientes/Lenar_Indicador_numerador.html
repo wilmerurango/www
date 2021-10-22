@@ -1,0 +1,44 @@
+<div class="col-lg-4">
+    <label>{{ indicadors.nombre_numerador}}:</label>
+    <div class="input-group">
+        {{form.valor_numerador}}
+    </div>
+</div>
+
+<div class="col-lg-4"> 
+    <label>{{ indicadors.nombre_denominador}}:</label>
+    <div class="input-group">
+        {{form.valor_denominador}}
+    </div>
+</div>
+
+<div class="col-lg-4"> 
+
+    <div class="row">
+        <div class="col-lg-6">
+            <label>Factor:</label>
+            <div class="input-group">
+                <input disabled class="form-control border-success"  id="id_factor" type="text" value={{indicadors.factor}}> 
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <label>Estandar:</label>
+            <div class="input-group">
+                <input disabled class="form-control border-success"  id="id_estandar" type="text" value={{indicadors.estandar}}> 
+            </div>
+        </div>
+        
+
+    </div>
+    
+
+</div>
+
+<div class="invisible" class="col-lg-4"> 
+    <label>Tendencia:</label>
+    <div class="input-group">
+       <input disabled class="form-control border-success"  id="id_tendencia_ascendente" type="text" value={{indicadors.tendencia_ascendente}}> 
+    </div>
+</div>
+

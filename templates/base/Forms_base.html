@@ -1,0 +1,29 @@
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+    <title>Crear Tipo de Reporte</title>
+{% endblock titulo %}
+
+
+{% block content %}
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    
+    <div class="container row justify-content-center aling-items-center">
+        
+        <!-- <center> -->
+            <div class="card card-custom  col-lg-7 mt-6">
+                
+                <div class="card-body ">
+                    {% block contentForm %}
+
+                    {% endblock contentForm %}
+                </div>
+            </div>
+
+        <!-- </center> -->
+        
+    </div>
+</div>
+
+{% endblock content %}

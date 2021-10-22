@@ -1,0 +1,61 @@
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+    <title>Crear Estado Acción</title>
+{% endblock titulo %}
+
+
+{% block content %}
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    
+    <div class="container row justify-content-center aling-items-center">
+        
+        <!-- <center> -->
+            <div class="card card-custom  col-lg-7 mt-6">
+                
+                <div class="card-body ">
+                    <form class="form" method="post">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <h3 class="kt-section__title">Registrar Estado Acción</h3>
+                            <br>
+
+                            <div class="form-group">
+                                <label>Estado de Avance:</label>
+                                {{ form.estado_Avance}}
+                                <span class="form-text text-muted">Por Favor Ingrese el Estado de Avance</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Estado Acción:</label>
+                                {{ form.accion}}
+                                <span class="form-text text-muted">Por Favor Ingrese el Estado de Acción</span>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                </div>
+                    
+                                <div class="col-lg-6 text-right">
+                                    <button type="reset" class="btn btn-secondary">Borrar</button>
+                                    <a class="btn btn-danger" href="{% url 'Estado_Accion_list' %}">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        <!-- </center> -->
+        
+    </div>
+</div>
+
+{% endblock content %}
+
+
+

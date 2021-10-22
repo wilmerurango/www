@@ -1,0 +1,56 @@
+
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+    <title>Crear Nivel de Referencia</title>
+{% endblock titulo %}
+
+
+{% block content %}
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container row justify-content-center aling-items-center">
+            <div class="card card-custom  col-lg-7 mt-6">
+                <div class="card-body ">       
+
+                    <form class="form" method="post"> <!--se agrego el metrodo post-->
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <h3 class="kt-section__title">Registrar Nivel de Referencia</h3>
+                            <hr>
+
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <label>Nombre del Nivel de Referencia:</label>
+                                    {{ form.nivel_ref }}
+                                    <!-- <input type="email" class="form-control" placeholder="Enter full name"/> -->
+                                    <!-- <span class="form-text text-muted">Please enter your full name</span> -->
+                                </div>
+                                
+                            </div>
+                        </div>
+                          
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                </div>
+                    
+                                <div class="col-lg-6 text-right">
+                                    <button type="reset" class="btn btn-secondary">Borrar</button>
+                                    <a class="btn btn-danger" href="{% url 'Nivel_Referencia_list' %}">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+
+

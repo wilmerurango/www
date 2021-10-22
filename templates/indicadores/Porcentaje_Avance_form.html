@@ -1,0 +1,89 @@
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+    <title>Crear Porcentaje de Avance</title>
+{% endblock titulo %}
+
+
+{% block content %}
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    
+    <div class="container row justify-content-center aling-items-center">
+        
+        <!-- <center> -->
+            <div class="card card-custom  col-lg-7 mt-6">
+                
+                <div class="card-body ">
+                    <form class="form" method="post">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <h3 class="kt-section__title">Registrar Porcentaje de Avance</h3>
+                            <br>
+
+                            <div class="form-group">
+                                <label>Estado de Avance:</label>
+                                {{ form.estado_Avance}}
+                                <span class="form-text text-muted">Por Favor Ingrese el Estado de Avance</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Porcentaje Avance:</label>
+                                {{ form.porc_avance}}
+                                <span class="form-text text-muted">Por Favor Ingrese el Porcentaje de Avance</span>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label>Subscription</label>
+                                <div class="input-group input-group-lg">
+                                    <div class="input-group-prepend"><span class="input-group-text" >$</span></div>
+                                    <input type="text" class="form-control form-control-solid" placeholder="99.9"/>
+                                </div>
+                            </div> -->
+
+                            <!-- <div class="form-group">
+                                <label>Communication:</label>
+                                <div class="checkbox-list">
+                                    <label class="checkbox">
+                                        <input type="checkbox"/>
+                                        <span></span>
+                                        Email
+                                    </label>
+
+                                    <label class="checkbox">
+                                        <input type="checkbox"/>
+                                        <span></span>
+                                        SMS
+                                    </label>
+
+                                    <label class="checkbox">
+                                        <input type="checkbox"/>
+                                        <span></span>
+                                        Phone
+                                    </label>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                </div>
+                    
+                                <div class="col-lg-6 text-right">
+                                    <button type="reset" class="btn btn-secondary">Borrar</button>
+                                    <a class="btn btn-danger" href="{% url 'Porcentaje_Avance_list' %}">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        <!-- </center> -->
+        
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,238 @@
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+    <title>Seguimiento de la Eficacia</title>
+{% endblock titulo %}
+
+
+{% block scripts_local %}
+    <script>
+        
+        function ElimRegistro(clicked_id, titulo)
+        {
+            var id = String(clicked_id);
+            var nombre_view = document.getElementById('Contenedor_idd').innerHTML = "¿Estas Seguro de Eliminar el Registro " + '"' +titulo +'" '+ "Identificado con ID "+'"'+ id +'"' + " ?";
+            ruta = '/Lenar_Indicador_elim/'+id +'/';
+            document.getElementById('selector_elim').href = ruta;
+        }
+
+    </script>
+{% endblock scripts_local %}
+
+
+{% block content %}
+<!-- <div class="d-flex flex-column-fluid"> -->
+    <!--begin::Container-->
+    
+    <!-- <div class="container"> -->
+        
+        
+        <!-- <center> -->
+        <div class="card card-custom m-4">
+            
+            <div class="card-body">
+                
+                <form method="POST" class="form" id="lista_estado_Accion_form" data-estado_Accion-url="{% url 'Lista_estado_Accion_ajax'%}"  data-estado_Hallazgo-url="{% url 'Lista_estado_Hallazgo_ajax'%}"  data-porcentaje_Avance-url="{% url 'Lista_porcentaje_Avance_ajax'%}" data-plan_mejora-url = "{% url 'Lista_Plan_Mejoramiento_ajax'%}">
+                    {% csrf_token %}
+
+                    <!-- <h3>Seguimiento de la Eficacia</h3> -->
+
+                    <div class=" card-body">
+                        <div class="row">
+                            <div  id = "form_plan_mejoramiento" class="col-lg-5 rounded border border-info mr-2">
+                               
+                            </div>
+    
+                            <div class="col-lg-6 rounded border border-info ml-2">
+                                <h3>Seguimiento de la Eficacia</h3>
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                    <label>Plan de Mejoramiento:</label>
+                                    {{ form.plan_Mejoramiento}}
+                                    <!-- <input type="email" class="form-control" placeholder="Enter full name"/>
+                                    <span class="form-text text-muted">Please enter your full name</span> -->
+                                    </div>
+                                    
+                                    <div class="col-lg-6">
+                                    <label>Responsable:</label>
+                                    {{ form.reponsable}}
+                                    <!-- <input type="email" class="form-control" placeholder="Enter email"/>
+                                    <span class="form-text text-muted">Please enter your email</span> -->
+                                    </div>
+        
+                                   
+                                </div>
+        
+        
+                                <div class="form-group row">
+                                    <div class="col-lg-4">
+                                    <label>Estado de Avance:</label>
+                                    {{ form.estado_Avance}}
+                                    <!-- <input type="email" class="form-control" placeholder="Enter full name"/> -->
+                                    <!-- <span class="form-text text-muted">Actividad a Realizar</span> -->
+                                    </div>
+                                    
+                                    <div class="col-lg-4">
+                                    <label>Estado de la Acción:</label>
+                                    {{ form.estado_Accion}}
+                                    <!-- <input type="email" class="form-control" placeholder="Enter email"/> -->
+                                    <!-- <span class="form-text text-muted">Propósito de la Actividad</span> -->
+                                    </div>
+        
+                                    <div class="col-lg-4">
+                                        <label>Fecha Evaluacion o Cierre:</label>
+                                        <div class="input-group">
+                                            {{ form.fecha_evaluacion}}
+                                            <!-- <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                                            <input type="text" class="form-control" placeholder=""/> -->
+                                        </div>
+                                        <!-- <span class="form-text text-muted">Responsable</span> -->
+        
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row">
+                                    <div class="col-lg-4">
+                                    <label>Oportunidad de Evacuación:</label>
+                                    {{ form.oportunidad_Ejecucion}}
+                                    <!-- <input type="email" class="form-control" placeholder="Enter full name"/> -->
+                                    <!-- <span class="form-text text-muted">Lugar Donde se Realiza la Actividad</span> -->
+                                    </div>
+                                    
+                                    <div class="col-lg-4">
+                                    <label>Porcentaje de Avance:</label>
+                                    {{ form.porcentaje_Avance}}
+                                    <!-- <input type="email" class="form-control" placeholder="Enter email"/> -->
+                                    <!-- <span class="form-text text-muted">Estrategias para Realizar la Actividad</span> -->
+                                    </div>
+        
+                                    <div class="col-lg-4">
+                                        <label>Estado del hallazgo:</label>
+                                        {{ form.estado_Hallazgo}}
+                                        <!-- <input type="email" class="form-control" placeholder="Enter email"/> -->
+                                        <!-- <span class="form-text text-muted">Estrategias para Realizar la Actividad</span> -->
+                                    </div>
+        
+                                    
+                                </div>
+        
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label>Soportes o Evidencias:</label>
+                                        <div class="input-group">
+                                            {{ form.soportes_evidencias}}
+                                            <!-- <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                                            <input type="text" class="form-control" placeholder=""/> -->
+                                        </div>
+                                        <!-- <span class="form-text text-muted">Please enter your username</span> -->
+                                    </div>
+        
+        
+        
+                                    <div class="col-lg-6">
+                                    <label>Observaciones:</label>
+                                    {{ form.observacion}}
+                                    <!-- <input type="email" class="form-control" placeholder="Enter full name"/> -->
+                                    <!-- <span class="form-text text-muted">Lugar Donde se Realiza la Actividad</span> -->
+                                    </div>
+        
+        
+                                </div>
+    
+                            </div>
+
+                        </div>
+
+                        
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                
+                            <div class="col-lg-6 text-right">
+                                <button type="reset" class="btn btn-secondary">Borrar</button>
+                                <a class="btn btn-danger" href="{% url 'Seguimiento_Eficacia_list' %}">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                
+                <script>
+                    $("#id_estado_Avance").change(function () {
+                        var url = $("#lista_estado_Accion_form").attr("data-estado_Accion-url");  // get the url of the `load_cities` view
+                        var url2 = $("#lista_estado_Accion_form").attr("data-estado_Hallazgo-url");  // get the url of the `load_cities` view
+                        var url3 = $("#lista_estado_Accion_form").attr("data-porcentaje_Avance-url");  // get the url of the `load_cities` view
+                        var estado_AvanceId = $(this).val();  // get the selected country ID from the HTML input
+
+                        $.ajax({                       // initialize an AJAX request
+                        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                        data: {
+                            'estado_Avance': estado_AvanceId       // add the country id to the GET parameters
+                        },
+                        success: function (data) {   // `data` is the return of the `load_cities` view function
+                            $("#id_estado_Accion").html(data);  // replace the contents of the city input with the data that came from the server
+                        }
+                        });
+
+                        $.ajax({                       // initialize an AJAX request
+                        url: url2,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                        data: {
+                            'estado_Avance': estado_AvanceId       // add the country id to the GET parameters
+                        },
+                        success: function (data) {   // `data` is the return of the `load_cities` view function
+                            $("#id_estado_Hallazgo").html(data);  // replace the contents of the city input with the data that came from the server
+                        }
+                        });
+
+                        $.ajax({                       // initialize an AJAX request
+                        url: url3,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                        data: {
+                            'estado_Avance': estado_AvanceId       // add the country id to the GET parameters
+                        },
+                        success: function (data) {   // `data` is the return of the `load_cities` view function
+                            $("#id_porcentaje_Avance").html(data);  // replace the contents of the city input with the data that came from the server
+                        }
+                        });
+                    });
+
+                    $("#id_plan_Mejoramiento").change(function () {
+                        var url = $("#lista_estado_Accion_form").attr("data-plan_mejora-url");  // get the url of the `load_cities` view
+                        var plan_MejoramientoId = $(this).val();  // get the selected country ID from the HTML input
+
+                        $.ajax({                       // initialize an AJAX request
+                        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                        data: {
+                            'plan_Mejoramiento': plan_MejoramientoId       // add the country id to the GET parameters
+                        },
+                        success: function (data) {   // `data` is the return of the `load_cities` view function
+                            $("#form_plan_mejoramiento").html(data);  // replace the contents of the city input with the data that came from the server
+                        }
+                        });
+                    });
+                </script>
+
+            </div>
+
+        </div>
+
+        <!-- </center> -->
+        
+    <!-- </div> -->
+<!-- </div> -->
+
+{% endblock content %}
+
+
+{% block scripts%}
+
+    {% load static %}
+    <!--begin::Page Scripts(used by this page) -->
+    <script src="{% static 'theme/demo1/dist/assets/js/pages/features/forms/widgets/bootstrap-datepicker.js' %}"></script>
+    <!--end::Page Scripts -->
+{% endblock %}

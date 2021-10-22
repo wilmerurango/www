@@ -1,0 +1,160 @@
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+    <title>Crear Plan de Mejoramiento</title>
+{% endblock titulo %}
+
+
+{% block scripts_local %}
+    <script>
+        
+        function ElimRegistro(clicked_id, titulo)
+        {
+            var id = String(clicked_id);
+            var nombre_view = document.getElementById('Contenedor_idd').innerHTML = "¿Estas Seguro de Eliminar el Registro " + '"' +titulo +'" '+ "Identificado con ID "+'"'+ id +'"' + " ?";
+            ruta = '/Lenar_Indicador_elim/'+id +'/';
+            document.getElementById('selector_elim').href = ruta;
+        }
+
+    </script>
+{% endblock scripts_local %}
+
+
+{% block content %}
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    
+    <div class="container">
+        
+        
+        <!-- <center> -->
+        <div class="card card-custom mt-6">
+            
+            <div class="card-body">
+                
+                <form method="POST" class="form">
+                    {% csrf_token %}
+
+                    <h3>Registrar Plan de Mejoramiento</h3>
+
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <div class="col-lg-4">
+                                <label>Título del Plan:</label>
+                                {{ form.titulo}}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-4">
+                            <label>Indicador:</label>
+                            {{ form.lenar_Indicador}}
+                            <!-- <input type="email" class="form-control" placeholder="Enter full name"/>
+                            <span class="form-text text-muted">Please enter your full name</span> -->
+                            </div>
+                            
+                            <div class="col-lg-4">
+                            <label>Fecha de Inicio:</label>
+                            {{ form.fecha_inicio}}
+                            <!-- <input type="email" class="form-control" placeholder="Enter email"/>
+                            <span class="form-text text-muted">Please enter your email</span> -->
+                            </div>
+
+                            <div class="col-lg-4">
+                                <label>Fecha de Terminación:</label>
+                                <div class="input-group">
+                                    {{ form.fecha_termin}}
+                                    <!-- <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                                    <input type="text" class="form-control" placeholder=""/> -->
+                                </div>
+                                <!-- <span class="form-text text-muted">Please enter your username</span> -->
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="col-lg-4">
+                            <label>¿QUE?:</label>
+                            {{ form.que}}
+                            <!-- <input type="email" class="form-control" placeholder="Enter full name"/> -->
+                            <span class="form-text text-muted">Actividad a Realizar</span>
+                            </div>
+                            
+                            <div class="col-lg-4">
+                            <label>¿PARA QUE?:</label>
+                            {{ form.para_que}}
+                            <!-- <input type="email" class="form-control" placeholder="Enter email"/> -->
+                            <span class="form-text text-muted">Propósito de la Actividad</span>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <label>¿QUIEN?:</label>
+                                <div class="input-group">
+                                    {{ form.quien}}
+                                    <!-- <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                                    <input type="text" class="form-control" placeholder=""/> -->
+                                </div>
+                                <span class="form-text text-muted">Responsable</span>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-4">
+                            <label>¿DONDE?:</label>
+                            {{ form.donde}}
+                            <!-- <input type="email" class="form-control" placeholder="Enter full name"/> -->
+                            <span class="form-text text-muted">Lugar Donde se Realiza la Actividad</span>
+                            </div>
+                            
+                            <div class="col-lg-4">
+                            <label>¿COMO?:</label>
+                            {{ form.como}}
+                            <!-- <input type="email" class="form-control" placeholder="Enter email"/> -->
+                            <span class="form-text text-muted">Estrategias para Realizar la Actividad</span>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <label>¿CUANTO COSTARÁ?:</label>
+                                {{ form.cuento_costara}}
+                                <!-- <input type="email" class="form-control" placeholder="Enter email"/> -->
+                                <span class="form-text text-muted">Escriba el valor del plan</span>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                
+                            <div class="col-lg-6 text-right">
+                                <button type="reset" class="btn btn-secondary">Borrar</button>
+                                <a class="btn btn-danger" href="{% url 'Plan_Mejoramiento_list' %}">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- </center> -->
+        
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block scripts%}
+
+    {% load static %}
+    <!--begin::Page Scripts(used by this page) -->
+    <script src="{% static 'theme/demo1/dist/assets/js/pages/features/forms/widgets/bootstrap-datepicker.js' %}"></script>
+    <!--end::Page Scripts -->
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+    <title>Crear Parametros de Seguimiento de Eficacia</title>
+{% endblock titulo %}
+
+
+
+{% block menu %}
+
+{% endblock menu %}
+
+
+
+{% block content %}
+
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+        <div class="row">
+
+            <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+                <form method="post" class="kt-form">
+
+                    {% csrf_token %}
+
+                    <div class="kt-portlet__body">
+                        <div class="kt-section kt-section--first">
+                            <h3 class="kt-section__title">Registrar Parametros de Seguimiento de Eficacia</h3>
+                            <div class="kt-section__body">
+
+                                <div class="form-group row">
+                                    <label class="col-lg-2 col-form-label">Nombre del Estado:</label>
+                                    <div class="col-lg-6">
+                                        {{ form.estado_Avance}}
+                                        <!-- <input type="email" class="form-control" placeholder="Enter full name"> -->
+                                        <span class="form-text text-muted">Por Favor Ingrese el Nombre del Estado</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label class="col-lg-2 col-form-label">Nombre Hallazgo:</label>
+                                    <div class="col-lg-6">
+                                        {{ form.estado_Hallazgo}}
+                                        <!-- <input type="email" class="form-control" placeholder="Enter full name"> -->
+                                        <span class="form-text text-muted">Por Favor Ingrese el Nombre Hallazgo</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-2 col-form-label">Estado de la Acción:</label>
+                                    <div class="col-lg-6">
+                                        {{ form.estado_accion}}
+                                        <!-- <input type="email" class="form-control" placeholder="Enter full name"> -->
+                                        <span class="form-text text-muted">Por Favor Ingrese el Estado de la Acción</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-2 col-form-label">Porcentaje de Avance:</label>
+                                    <div class="col-lg-6">
+                                        {{ form.porcentaje_avance}}
+                                        <!-- <input type="email" class="form-control" placeholder="Enter full name"> -->
+                                        <span class="form-text text-muted">Por Favor Ingrese el Porcentaje de Avance</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <div class="row">
+                                <div class="col-lg-3"></div>
+                                <div class="col-lg-6">
+
+                                    <input type="submit" class="btn btn-info" value="Guardar">
+                                    <a class="btn btn-danger" href="{% url 'Parametro_Segui_Eficacia_list' %}">Cancelar</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

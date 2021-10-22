@@ -1,0 +1,81 @@
+
+{% extends 'base/index.html' %}
+
+{% block titulo %}
+    <title>Crear Norma</title>
+{% endblock titulo %}
+
+
+{% block content %}
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container row justify-content-center aling-items-center">
+            <div class="card card-custom  col-lg-7 mt-6">
+                <div class="card-body ">       
+
+                    <form class="form" method="post"> <!--se agrego el metrodo post-->
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <h3 class="kt-section__title">Registrar Norma</h3>
+                            <hr>
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Nombre de la Norma:</label>
+                                    {{ form.nombre_norma }}
+
+                                    <label>Tipo de Documento:</label>
+                                    {{ form.tipo_documento }}
+
+                                    <label>Número Norma:</label>
+                                    {{ form.num_norma }}
+
+                                    <label>Fecha Emision:</label>
+                                    {{ form.fecha_emision }}
+
+                                    <label>Emitido Por:</label>
+                                    {{ form.emitido }}
+
+                                    <label>Estado:</label>
+                                    {{ form.estado }}
+
+                                    <label>Direccion URL:</label>
+                                    {{ form.dir_url }}
+
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label>Descripción de la Norma:</label>
+                                    {{ form.descripcion_norma }}
+
+                                    <label>Observación:</label>
+                                    {{ form.obs }}
+                                </div>
+
+                            </div>
+                        </div>
+                          
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                </div>
+                    
+                                <div class="col-lg-6 text-right">
+                                    <button type="reset" class="btn btn-secondary">Borrar</button>
+                                    <a class="btn btn-danger" href="{% url 'Norma_list' %}">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+
+
