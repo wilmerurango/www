@@ -28,7 +28,7 @@ urlpatterns = [
     # path('', index, name='index'),#@
     
     #LOGIN
-    path('login',LoginView.as_view(template_name= 'base/login.html'), name ='login'),#@
+    path('',LoginView.as_view(template_name= 'base/login.html'), name ='login'),#@
     #LOGOUT
     path('logout/',LogoutView.as_view(), name ='logout'),#@
 
