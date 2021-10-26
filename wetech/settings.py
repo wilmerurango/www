@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-k+3g(4kb#_$&49c1w53^(o+jc(a&n9w7icb95)=y2l6wc8-e2*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','wetechinnovations.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','wetechinnovations.herokuapp.com',]
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'Costo',
     'indicador',
+    'usuario',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,5 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')#@
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+FILE_CHARSET = 'utf-8'
