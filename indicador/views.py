@@ -138,7 +138,8 @@ def Streaming(request,*args, **kwargs):
 def Dashboard(request,*args, **kwargs):
     return render(request, 'indicadores/Dashboard.html')
     
-
+def Pagina_Inicio(request,*args, **kwargs):
+    return render(request, 'base/pagina_inicio.html')
 
 
 #ESTOS SON LOS TEMAS DE LA PAGINA

@@ -16,21 +16,21 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.views import LoginView, LogoutView#@
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
-from indicador.views import Streaming, Dashboard, Crear_Usuario, index
+from indicador.views import Streaming, Dashboard, Crear_Usuario, index, Pagina_Inicio
 
 urlpatterns = [
     path('Crear_Usuario/', Crear_Usuario.as_view(), name='Crear_Usuario'),
 
     path('admin/', admin.site.urls),
 
-    # path('', index, name='index'),#@
-    
+    #PAGINA DE INICIO
+    path('',Pagina_Inicio, name ='page'),
     #LOGIN
-    path('',LoginView.as_view(template_name= 'base/login.html'), name ='login'),#@
+    path('login/',LoginView.as_view(template_name= 'base/login.html'), name ='login'),
     #LOGOUT
-    path('logout/',LogoutView.as_view(), name ='logout'),#@
+    path('logout/',LogoutView.as_view(), name ='logout'),
 
     #STREAMING Y DASBOARD
     path('Streaming/', Streaming, name='Streaming'),
