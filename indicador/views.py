@@ -137,6 +137,12 @@ def Streaming(request,*args, **kwargs):
 
 def Dashboard(request,*args, **kwargs):
     return render(request, 'indicadores/Dashboard.html')
+
+def Dashboard1(request,*args, **kwargs):
+    return render(request, 'indicadores/Dashboard1.html')
+
+def Dashboard2(request,*args, **kwargs):
+    return render(request, 'indicadores/Dashboard2.html')
     
 def Pagina_Inicio(request,*args, **kwargs):
     return render(request, 'base/pagina_inicio.html')

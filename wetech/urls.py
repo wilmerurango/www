@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
-from indicador.views import Streaming, Dashboard, Crear_Usuario, index, Pagina_Inicio
+from indicador.views import Streaming, Dashboard,Dashboard1, Dashboard2, Crear_Usuario, index, Pagina_Inicio
 
 urlpatterns = [
     path('Crear_Usuario/', Crear_Usuario.as_view(), name='Crear_Usuario'),
@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     #PAGINA DE INICIO
-    path('',Pagina_Inicio, name ='page'),
+    path('',index, name ='index'),
     #LOGIN
     path('login/',LoginView.as_view(template_name= 'base/login.html'), name ='login'),
     #LOGOUT
@@ -35,6 +35,10 @@ urlpatterns = [
     #STREAMING Y DASBOARD
     path('Streaming/', Streaming, name='Streaming'),
     path('Dashboard/', Dashboard, name='Dashboard'),
+    path('Dashboard1/', Dashboard1, name='Dashboard1'),
+    path('Dashboard2/', Dashboard2, name='Dashboard2'),
+    
+
 
     #ESTOS SON LOS TEMAS DE LA APLICACION
     # path('power_bi/', api_bi, name='api_bi'),
