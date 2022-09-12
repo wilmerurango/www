@@ -143,6 +143,9 @@ def Dashboard1(request,*args, **kwargs):
 
 def Dashboard2(request,*args, **kwargs):
     return render(request, 'indicadores/Dashboard2.html')
+
+def Dashboard3(request,*args, **kwargs):
+    return render(request, 'indicadores/Dashboard3.html')
     
 def Pagina_Inicio(request,*args, **kwargs):
     return render(request, 'base/pagina_inicio.html')

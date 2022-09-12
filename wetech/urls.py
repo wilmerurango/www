@@ -37,6 +37,7 @@ urlpatterns = [
     path('Dashboard/', Dashboard, name='Dashboard'),
     path('Dashboard1/', Dashboard1, name='Dashboard1'),
     path('Dashboard2/', Dashboard2, name='Dashboard2'),
+    path('Dashboard3/', Dashboard3, name='Dashboard3'),
     
 
 
