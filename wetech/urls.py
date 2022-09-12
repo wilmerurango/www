@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
-from indicador.views import Streaming, Dashboard,Dashboard1, Dashboard2, Crear_Usuario, index, Pagina_Inicio
+from indicador.views import Streaming, Dashboard,Dashboard1, Dashboard2, Crear_Usuario, index, Pagina_Inicio,Dashboard3
 
 urlpatterns = [
     path('Crear_Usuario/', Crear_Usuario.as_view(), name='Crear_Usuario'),
