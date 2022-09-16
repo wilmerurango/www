@@ -30,12 +30,27 @@
 
 <div class="row ml-6">
     
+    
     <div class="card card-custom col-lg-11 mt-5 ml-6">
-        <iframe title="pgp_sanitas" width="100%" height="630px" src="https://app.powerbi.com/view?r=eyJrIjoiYzg0MzhiNWMtZjFkMi00MGM5LTk3YTYtZTI0MDQxNTlhMjNhIiwidCI6Ijk5ZjdiNTVlLTljYmUtNDY3Yi04MTQzLTkxOTc4MjkxOGFmYiIsImMiOjR9&pageName=ReportSectionf0c20acdc70b06a15daa" frameborder="0" allowFullScreen="true"></iframe>
+        <iframe id="grafico" title="pgp_sanitas" width="100%"  height="630px" src="https://app.powerbi.com/view?r=eyJrIjoiYzg0MzhiNWMtZjFkMi00MGM5LTk3YTYtZTI0MDQxNTlhMjNhIiwidCI6Ijk5ZjdiNTVlLTljYmUtNDY3Yi04MTQzLTkxOTc4MjkxOGFmYiIsImMiOjR9&pageName=ReportSectionf0c20acdc70b06a15daa" frameborder="0" allowFullScreen="true"></iframe>
         <!-- <iframe title="prueba_cumi" width="100%" height="630px" src="https://app.powerbi.com/view?r=eyJrIjoiMGI2NmQ4NjctYmUyZC00NzU0LThmZmEtYjYyZTM1M2IyMGNkIiwidCI6Ijk5ZjdiNTVlLTljYmUtNDY3Yi04MTQzLTkxOTc4MjkxOGFmYiIsImMiOjR9&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe> -->
         <!-- <iframe width="100%" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNzIwMmJlOGEtM2YyNi00OTY5LWE1N2ItOTMyOGE5ZTI0Zjc0IiwidCI6ImE5NDRjNDY2LTczNGItNGJkNC04Y2Q4LWM3N2Q1MjlhMzE1MCJ9&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe> -->
+        
+    
     </div>
     
 </div>
 
 {% endblock content %}			
+
+{% block scripts%}
+<script>
+    var content_grafico = document.getElementById('kt_content');
+    var grafico1 = document.getElementById('grafico');
+    console.log(content_grafico.clientHeight);
+    console.log(grafico1.height);
+    grafico1.height = content_grafico.clientHeight-30;
+    console.log(grafico1.height);
+</script>
+
+{% endblock %}
